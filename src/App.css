@@ -1,38 +1,1316 @@
-.App {
-  text-align: center;
+/* ================= RESET & BASE ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f0e8;
+  color: #333;
+}
+
+/* ================= AUTH CONTAINER ================= */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 100%);
+}
+
+.wood-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 8px);
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.auth-card {
+  background: white;
+  border-radius: 30px;
+  padding: 50px 40px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  text-align: center;
+  z-index: 1;
+  animation: slideUp 0.5s ease;
 }
 
-.App-header {
-  background-color: #282c34;
+.logo-section {
+  margin-bottom: 30px;
+}
+
+.company-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.auth-card h2 {
+  color: #8B4513;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.auth-card p {
+  color: #666;
+  font-size: 14px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #e0d5c0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139,69,19,0.1);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(139,69,19,0.3);
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-link {
+  color: #8B4513;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.auth-link:hover {
+  color: #A0522D;
+}
+
+/* ================= NAVIGATION BAR ================= */
+.nav-bar {
+  background: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tree-icon {
+  font-size: 32px;
+}
+
+.nav-logo h1 {
+  color: #8B4513;
+  font-size: 24px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.nav-btn.dealer {
+  background: #4CAF50;
+  color: white;
+}
+
+.nav-btn.admin {
+  background: #333;
+  color: white;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ================= DASHBOARD CONTAINER ================= */
+.dashboard-container {
   min-height: 100vh;
+  background: #f5f0e8;
+}
+
+/* ================= HERO SECTION ================= */
+.hero-section {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1600') center/cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 64px;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-badges span {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+/* ================= TOKEN CHECK SECTION ================= */
+.token-check-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f5f0e8 0%, #e8dcc8 100%);
+}
+
+.token-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.token-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.token-card h2 {
+  color: #8B4513;
+  margin-bottom: 15px;
+}
+
+.token-input-group {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.token-input {
+  flex: 1;
+  padding: 18px 20px;
+  border: 2px solid #e0d5c0;
+  border-radius: 15px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.token-input:focus {
+  outline: none;
+  border-color: #8B4513;
+}
+
+.check-btn {
+  padding: 18px 35px;
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.check-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.token-info {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f5f0;
+  border-radius: 15px;
+  color: #666;
+}
+
+.token-info p {
+  margin: 8px 0;
+}
+
+/* ================= PRODUCTS SHOWCASE ================= */
+.products-showcase {
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.products-showcase h2 {
+  color: #8B4513;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.products-grid-mini {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-mini-card {
+  background: #f9f5f0;
+  padding: 30px;
+  border-radius: 20px;
+  transition: transform 0.3s;
+}
+
+.product-mini-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-mini-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.product-mini-card h4 {
+  color: #8B4513;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.product-mini-card p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* ================= FOOTER ================= */
+.brand-footer {
+  background: #2c1810;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-stats span {
+  opacity: 0.8;
+}
+
+/* ================= POPUP ================= */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+.popup-content {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s;
+}
+
+.win-popup {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: white;
+}
+
+.popup-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.win-amount {
+  font-size: 56px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.popup-close {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #8B4513;
+}
+
+/* ================= DEALER DASHBOARD ================= */
+.dealer-container {
+  min-height: 100vh;
+  background: #f5f0e8;
+}
+
+.dealer-header {
+  background: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-small {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tree-icon-small {
+  font-size: 24px;
+}
+
+.logo-small h1 {
+  color: #8B4513;
+  font-size: 20px;
+}
+
+.welcome-text {
+  color: #666;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wallet-card {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+}
+
+.wallet-label {
+  font-size: 12px;
+  opacity: 0.9;
+  display: block;
+}
+
+.wallet-value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ================= DEALER TABS ================= */
+.dealer-tabs, .admin-tabs {
+  display: flex;
+  gap: 5px;
+  background: white;
+  padding: 0 20px;
+  border-bottom: 1px solid #e0d5c0;
+}
+
+.tab {
+  padding: 15px 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+  color: #666;
+}
+
+.tab-active {
+  padding: 15px 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #8B4513;
+  border-bottom: 3px solid #8B4513;
+  font-weight: bold;
+}
+
+/* ================= TOKENS SECTION ================= */
+.tokens-section, .redeem-section, .history-section, .admin-section {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-banner {
+  background: #e3f2fd;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  color: #1976d2;
+}
+
+.token-input-section {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.token-input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #e0d5c0;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.add-token-btn {
+  padding: 12px 25px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.token-list {
+  margin-top: 20px;
+}
+
+.token-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.token-badge {
+  background: #e8dcc8;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-token {
+  background: none;
+  border: none;
+  color: #f44336;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.token-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.secondary-btn {
+  padding: 12px 24px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ================= REDEEM SECTION ================= */
+.redeem-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.upi-section {
+  margin: 20px 0;
+}
+
+.upi-input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.redeem-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.redeem-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ================= TABLES ================= */
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px;
+  background: #f9f5f0;
+  color: #8B4513;
+  font-weight: bold;
+  border-bottom: 2px solid #e0d5c0;
+}
+
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0d5c0;
+}
+
+.data-table tr:hover {
+  background: #f9f5f0;
+}
+
+/* ================= STATUS COLORS ================= */
+.status-approved, .txn-type-credit {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-cancelled, .txn-type-debit {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #FF9800;
+  font-weight: bold;
+}
+
+.status-active {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-inactive {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* ================= ADMIN DASHBOARD ================= */
+.admin-container {
+  min-height: 100vh;
+  background: #f5f0e8;
+}
+
+.admin-header {
+  background: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.token-setting {
+  background: #f9f5f0;
+  padding: 8px 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.small-btn {
+  padding: 5px 12px;
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ================= STATS GRID ================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.stat-card-large {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.stat-card-large:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card-large .stat-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.stat-card-large .stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: #8B4513;
+}
+
+.stat-card-large .stat-label {
+  color: #666;
+  margin-top: 5px;
+}
+
+.quick-actions {
+  padding: 20px;
+  text-align: center;
+}
+
+.primary-btn {
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ================= MODAL ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content.large {
+  max-width: 700px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  padding: 12px 24px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.warning-text {
+  color: #f44336;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.note {
+  color: #666;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.approve-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.cancel-btn {
+  background: #f44336;
+  color: white;
+}
+
+.edit-btn {
+  background: #FF9800;
+  color: white;
+}
+
+.view-btn {
+  background: #2196F3;
+  color: white;
+}
+
+/* ================= LOADING STATES ================= */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+.spinner-large {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(139,69,19,0.3);
+  border-radius: 50%;
+  border-top-color: #8B4513;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 20px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  z-index: 2000;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.toast-refresh {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  animation: slideInRight 0.3s;
 }
 
-@keyframes App-logo-spin {
+/* ================= ANIMATIONS ================= */
+@keyframes slideUp {
   from {
-    transform: rotate(0deg);
+    transform: translateY(50px);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 36px;
+  }
+  
+  .hero-content p {
+    font-size: 18px;
+  }
+  
+  .token-input-group {
+    flex-direction: column;
+  }
+  
+  .dealer-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .header-left {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid-mini {
+    grid-template-columns: 1fr;
+  }
+  
+  .dealer-tabs, .admin-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab, .tab-active {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 30px 20px;
+  }
+  
+  .token-card {
+    padding: 30px 20px;
+  }
+  
+  .stat-card-large .stat-value {
+    font-size: 28px;
+  }
+}
+
+/* Add to App.css */
+.token-display {
+  background: rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.token-display p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.token-display strong {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+/* Add to App.css */
+
+/* Transaction Badges */
+.txn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.txn-credit {
+  background: #e8f5e9;
+  color: #4CAF50;
+}
+
+.txn-debit {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.txn-payout {
+  background: #e3f2fd;
+  color: #2196F3;
+}
+
+.credit-amount {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.debit-amount {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Filters Section */
+.filters-section {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-group label {
+  font-size: 12px;
+  color: #666;
+  font-weight: bold;
+}
+
+.filter-select, .filter-input {
+  padding: 10px 15px;
+  border: 2px solid #e0d5c0;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+.clear-filters-btn {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Transaction Summary Admin */
+.transaction-summary-admin {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.summary-card-admin {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.summary-card-admin .summary-icon {
+  font-size: 32px;
+}
+
+.summary-card-admin .summary-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card-admin .summary-details span {
+  font-size: 12px;
+  color: #666;
+}
+
+.summary-card-admin .summary-details strong {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.summary-card-admin.credit .summary-details strong {
+  color: #4CAF50;
+}
+
+.summary-card-admin.debit .summary-details strong {
+  color: #f44336;
+}
+
+.summary-card-admin.payout .summary-details strong {
+  color: #2196F3;
+}
+
+.summary-card-admin.net .summary-details strong {
+  color: #8B4513;
+}
+
+/* Transaction Summary for Dealer */
+.transaction-summary {
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+}
+
+.transaction-summary h4 {
+  margin-bottom: 15px;
+  color: #8B4513;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.summary-card {
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.summary-card.credit {
+  background: #e8f5e9;
+}
+
+.summary-card.credit strong {
+  color: #4CAF50;
+}
+
+.summary-card.debit {
+  background: #ffebee;
+}
+
+.summary-card.debit strong {
+  color: #f44336;
+}
+
+.summary-card.payout {
+  background: #e3f2fd;
+}
+
+.summary-card.payout strong {
+  color: #2196F3;
+}
+
+.summary-card span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.summary-card strong {
+  font-size: 18px;
+}
+
+/* Dealer Info Cell */
+.dealer-info-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.dealer-info-cell small {
+  font-size: 10px;
+  color: #999;
+}
+
+/* No Data Cell */
+.no-data-cell {
+  text-align: center;
+  padding: 40px !important;
+  color: #999;
+}
+
+/* Remark Cell */
+.remark-cell {
+  max-width: 200px;
+  word-break: break-word;
+  font-size: 12px;
+  color: #666;
+}
+
+/* No Data Card */
+.no-data-card {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 15px;
+}
+
+.no-data-card p {
+  font-size: 18px;
+  color: #666;
+}
+
+.no-data-card .sub-text {
+  font-size: 14px;
+  color: #999;
+  margin-top: 10px;
+}
+
+.summary-card.net {
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+}
+
+.summary-card.net span {
+  color: rgba(255,255,255,0.8);
+}
+
+.summary-card.net strong {
+  color: white;
 }
