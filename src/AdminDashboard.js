@@ -213,7 +213,7 @@ export default function AdminDashboard({ onLogout }) {
             <span className="tree-icon-small">🌳</span>
             <h1>Admin Panel</h1>
           </div>
-          <p className="welcome-text">GREYSTONE Management</p>
+          <p className="welcome-text">HEXELO Management</p>
         </div>
         <div className="header-right">
           <div className="token-setting">

@@ -9,15 +9,31 @@ export default function UserDashboard({ onNavigate }) {
   const [checkedToken, setCheckedToken] = useState("");
 
   const brandData = {
-    name: "GREYSTONE",
-    tagline: "Premium Plywood & Furniture Solutions",
+    name: "HEXELO",
+    tagline: "Premium Hardware Solutions",
     features: ["🌟 Quality Assured", "🌿 Eco-Friendly", "💪 10 Year Warranty"],
     products: [
-      { name: "GREYSTONE CHAUGATH", description: "5×2.5 inch & 6×2.5 inch | 25 year guarantee", icon: "🚪" },
-      { name: "VENEER", description: "4mm thickness | Premium Wood Finishes", icon: "🌳" },
-      { name: "GREYSTONE LAMINATES", description: "Thickness: 0.72mm to 1.25mm", icon: "📐" },
-      { name: "GREYSTONE FLUSH DOORS", description: "30mm, 32mm | Water proof", icon: "🚪" }
-    ]
+        { 
+          name: "MORTISE LOCKS", 
+          description: "Double safety mechanism | Anti-corrosion", 
+          icon: "🔒" 
+        },
+        { 
+          name: "MAIN DOOR HANDLES", 
+          description: "Premium stainless steel | Long lasting finish | Ergonomic design | Weather resistant", 
+          icon: "🚪" 
+        },
+        { 
+          name: "PREMIUM SOFA LEGS", 
+          description: "Solid wood & metal | Anti-skid base | Modern designs", 
+          icon: "🛋️" 
+        },
+        { 
+          name: "KNOBS", 
+          description: "Water proof | Brass/SS finishes | Easy installation", 
+          icon: "🔘" 
+        }
+      ]
   };
 
   const handleCheckToken = async () => {
@@ -67,7 +83,7 @@ export default function UserDashboard({ onNavigate }) {
       <div className="nav-bar">
         <div className="nav-logo">
           <span className="tree-icon">🌳</span>
-          <h1>GREYSTONE</h1>
+          <h1>HEXELO</h1>
         </div>
         <div className="nav-buttons">
           <button onClick={() => onNavigate("dealerLogin")} className="nav-btn dealer">🏪 Dealer Login</button>
@@ -79,8 +95,8 @@ export default function UserDashboard({ onNavigate }) {
       <div className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1>GREYSTONE</h1>
-          <p>Premium Plywood & Furniture Solutions</p>
+          <h1>HEXELO</h1>
+          <p>Premium Hardware Solutions</p>
           <div className="hero-badges">
             {brandData.features.map((feature, idx) => <span key={idx}>{feature}</span>)}
           </div>
@@ -111,7 +127,7 @@ export default function UserDashboard({ onNavigate }) {
           
           <div className="token-info">
             <p>💡 Each token has a guaranteed cash prize!</p>
-            <p>🏪 Visit any GREYSTONE dealer to claim your winnings</p>
+            <p>🏪 Visit any HEXELO dealer to claim your winnings</p>
             <p>⚠️ Token remains active until claimed from dealer</p>
           </div>
         </div>
@@ -134,8 +150,8 @@ export default function UserDashboard({ onNavigate }) {
       {/* Footer */}
       <div className="brand-footer">
         <div className="footer-content">
-          <div className="footer-logo">🌳 GREYSTONE</div>
-          <p>Premium Plywood & Furniture Solutions | Since 2020</p>
+          <div className="footer-logo">🌳 HEXELO</div>
+          <p>Premium Hardware Solutions | Since 2020</p>
           <div className="footer-stats">
             <span>🏆 25 Year Guarantee</span>
             <span>🌿 Eco-Friendly</span>

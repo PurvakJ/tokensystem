@@ -56,7 +56,7 @@ function DealerLogin({ setPage, setDealer }) {
       <div className="wood-pattern"></div>
       <div className="auth-card">
         <div className="logo-section">
-          <img src="https://i.postimg.cc/FzPV5Mz4/Gemini_Generated_Image_qzhzksqzhzksqzhz_removebg_preview.png" alt="GREYSTONE" className="company-logo" />
+          <img src="https://i.postimg.cc/Njyq9QbM/Whats_App_Image_2026_03_19_at_12_33_09_removebg_preview.png" alt="HEXELO" className="company-logo" />
           <h2>Dealer Login</h2>
           <p>Access your dealer dashboard</p>
         </div>
@@ -115,9 +115,9 @@ function DealerSignup({ setPage }) {
       <div className="wood-pattern"></div>
       <div className="auth-card">
         <div className="logo-section">
-          <img src="https://i.postimg.cc/FzPV5Mz4/Gemini_Generated_Image_qzhzksqzhzksqzhz_removebg_preview.png" alt="GREYSTONE" className="company-logo" />
+          <img src="https://i.postimg.cc/Njyq9QbM/Whats_App_Image_2026_03_19_at_12_33_09_removebg_preview.png" alt="HEXELO" className="company-logo" />
           <h2>Register as Dealer</h2>
-          <p>Join GREYSTONE dealer network</p>
+          <p>Join HEXELO dealer network</p>
         </div>
         
         <input 
@@ -178,7 +178,7 @@ function AdminLogin({ setPage }) {
       <div className="wood-pattern"></div>
       <div className="auth-card">
         <div className="logo-section">
-          <img src="https://i.postimg.cc/FzPV5Mz4/Gemini_Generated_Image_qzhzksqzhzksqzhz_removebg_preview.png" alt="GREYSTONE" className="company-logo" />
+          <img src="https://i.postimg.cc/Njyq9QbM/Whats_App_Image_2026_03_19_at_12_33_09_removebg_preview.png" alt="HEXELO" className="company-logo" />
           <h2>Admin Login</h2>
           <p>Enter admin credentials</p>
         </div>
@@ -200,3 +200,4 @@ function AdminLogin({ setPage }) {
     </div>
   );
 }
+
