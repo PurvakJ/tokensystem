@@ -8,7 +8,7 @@ export default function AdminDashboard({ onLogout }) {
   const [tokens, setTokens] = useState([]);
   const [redeems, setRedeems] = useState([]);
   const [transactions, setTransactions] = useState([]);
-  const [tokenValue, setTokenValue] = useState(1);
+  const [, setTokenValue] = useState(1);
   const [stats, setStats] = useState({});
   const [tokenBulkInput, setTokenBulkInput] = useState("");
   const [tokenValuePerToken, setTokenValuePerToken] = useState("");
@@ -142,18 +142,7 @@ export default function AdminDashboard({ onLogout }) {
     }
   };
 
-  const handleUpdateTokenValue = async () => {
-    const newValue = prompt("Enter value per token (₹):", tokenValue);
-    if (newValue && Number(newValue) > 0) {
-      setLoading(true);
-      const res = await api("updateTokenValueSetting", { tokenValue: Number(newValue) });
-      setLoading(false);
-      if (res.success) {
-        alert("Token value updated!");
-        setTokenValue(Number(newValue));
-      }
-    }
-  };
+
 
   const handleUpdateDealerStatus = async (dealerId, currentStatus) => {
     const newStatus = currentStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
@@ -214,13 +203,6 @@ export default function AdminDashboard({ onLogout }) {
             <h1>Admin Panel</h1>
           </div>
           <p className="welcome-text">HEXELO Management</p>
-        </div>
-        <div className="header-right">
-          <div className="token-setting">
-            <span>🎫 Token Value: ₹{tokenValue}</span>
-            <button onClick={handleUpdateTokenValue} className="small-btn" disabled={loading}>Edit</button>
-          </div>
-          <button onClick={onLogout} className="logout-btn" disabled={loading}>🚪 Logout</button>
         </div>
       </div>
 
@@ -344,46 +326,58 @@ export default function AdminDashboard({ onLogout }) {
         </div>
       )}
 
-      {/* Tokens Tab */}
-      {activeTab === "tokens" && (
-        <div className="admin-section">
-          <div className="section-header">
-            <h3>All Tokens</h3>
-            <button onClick={() => setShowTokenModal(true)} className="add-btn" disabled={loading}>
-              + Issue Tokens
-            </button>
-          </div>
-          <div className="stats-cards-mini">
-            <div className="stat-mini">
-              <span>Total: {tokens.length}</span>
-              <span>Used: {tokens.filter(t => t.status === 'USED').length}</span>
-              <span>Active: {tokens.filter(t => t.status === 'ACTIVE').length}</span>
-            </div>
-          </div>
-          <div className="table-container">
-            <table className="data-table">
-              <thead>
-                <tr><th>Token Number</th><th>Value</th><th>Status</th><th>Used By</th><th>Used At</th></tr>
-              </thead>
-              <tbody>
-                {tokens.slice(0, 100).map((token, i) => (
-                  <tr key={i}>
-                    <td>{token.tokenNumber}</td>
-                    <td>₹{token.value}</td>
-                    <td>
-                      <span className={`status-${token.status?.toLowerCase()}`}>
-                        {token.status}
-                      </span>
-                    </td>
-                    <td>{token.usedBy || '-'}</td>
-                    <td>{formatDate(token.usedAt)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+{/* Tokens Tab */}
+{activeTab === "tokens" && (
+  <div className="admin-section">
+    <div className="section-header">
+      <h3>All Tokens</h3>
+      <button onClick={() => setShowTokenModal(true)} className="add-btn" disabled={loading}>
+        + Issue Tokens
+      </button>
+    </div>
+    <div className="stats-cards-mini">
+      <div className="stat-mini">
+        <span>Total: {tokens.length}</span>
+        <span>Used: {tokens.filter(t => t.status === 'USED').length}</span>
+        <span>Active: {tokens.filter(t => t.status === 'ACTIVE').length}</span>
+      </div>
+    </div>
+    <div className="table-container">
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>Token Number</th>
+            <th>Value</th>
+            <th>Status</th>
+            <th>Used By</th>
+            <th>Used At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tokens.slice(0, 100).map((token, i) => {
+            // Find dealer name from dealer ID
+            const dealer = dealers.find(d => d.id === token.usedBy);
+            const usedByName = dealer ? dealer.name : token.usedBy || '-';
+            
+            return (
+              <tr key={i}>
+                <td>{token.tokenNumber}</td>
+                <td>₹{token.value}</td>
+                <td>
+                  <span className={`status-${token.status?.toLowerCase()}`}>
+                    {token.status}
+                  </span>
+                </td>
+                <td>{usedByName}</td>
+                <td>{formatDate(token.usedAt)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
 
       {/* Redeems Tab */}
       {activeTab === "redeems" && (
@@ -498,20 +492,6 @@ export default function AdminDashboard({ onLogout }) {
           
           {/* Summary Cards */}
           <div className="transaction-summary-admin">
-            <div className="summary-card-admin credit">
-              <div className="summary-icon">➕</div>
-              <div className="summary-details">
-                <span>Total Credits</span>
-                <strong>₹{totalCredits.toFixed(2)}</strong>
-              </div>
-            </div>
-            <div className="summary-card-admin debit">
-              <div className="summary-icon">➖</div>
-              <div className="summary-details">
-                <span>Total Debits</span>
-                <strong>₹{totalDebits.toFixed(2)}</strong>
-              </div>
-            </div>
             <div className="summary-card-admin payout">
               <div className="summary-icon">💰</div>
               <div className="summary-details">
