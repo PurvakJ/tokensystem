@@ -142,8 +142,6 @@ export default function AdminDashboard({ onLogout }) {
     }
   };
 
-
-
   const handleUpdateDealerStatus = async (dealerId, currentStatus) => {
     const newStatus = currentStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
     setLoading(true);
@@ -159,7 +157,6 @@ export default function AdminDashboard({ onLogout }) {
     if (!dateString) return '-';
     return new Date(dateString).toLocaleString();
   };
-
 
   const pendingRedeems = (redeems || []).filter(r => r.status === 'PENDING');
 
@@ -191,6 +188,12 @@ export default function AdminDashboard({ onLogout }) {
     return '📝';
   };
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      onLogout();
+    }
+  };
+
   return (
     <div className="admin-container">
       {refreshing && <div className="toast-refresh">Refreshing data...</div>}
@@ -203,6 +206,11 @@ export default function AdminDashboard({ onLogout }) {
             <h1>Admin Panel</h1>
           </div>
           <p className="welcome-text">HEXELO Management</p>
+        </div>
+        <div className="header-right">
+          <button onClick={handleLogout} className="logout-btn" title="Logout">
+            🚪 Logout
+          </button>
         </div>
       </div>
 
@@ -326,58 +334,58 @@ export default function AdminDashboard({ onLogout }) {
         </div>
       )}
 
-{/* Tokens Tab */}
-{activeTab === "tokens" && (
-  <div className="admin-section">
-    <div className="section-header">
-      <h3>All Tokens</h3>
-      <button onClick={() => setShowTokenModal(true)} className="add-btn" disabled={loading}>
-        + Issue Tokens
-      </button>
-    </div>
-    <div className="stats-cards-mini">
-      <div className="stat-mini">
-        <span>Total: {tokens.length}</span>
-        <span>Used: {tokens.filter(t => t.status === 'USED').length}</span>
-        <span>Active: {tokens.filter(t => t.status === 'ACTIVE').length}</span>
-      </div>
-    </div>
-    <div className="table-container">
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Token Number</th>
-            <th>Value</th>
-            <th>Status</th>
-            <th>Used By</th>
-            <th>Used At</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tokens.slice(0, 100).map((token, i) => {
-            // Find dealer name from dealer ID
-            const dealer = dealers.find(d => d.id === token.usedBy);
-            const usedByName = dealer ? dealer.name : token.usedBy || '-';
-            
-            return (
-              <tr key={i}>
-                <td>{token.tokenNumber}</td>
-                <td>₹{token.value}</td>
-                <td>
-                  <span className={`status-${token.status?.toLowerCase()}`}>
-                    {token.status}
-                  </span>
-                </td>
-                <td>{usedByName}</td>
-                <td>{formatDate(token.usedAt)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  </div>
-)}
+      {/* Tokens Tab */}
+      {activeTab === "tokens" && (
+        <div className="admin-section">
+          <div className="section-header">
+            <h3>All Tokens</h3>
+            <button onClick={() => setShowTokenModal(true)} className="add-btn" disabled={loading}>
+              + Issue Tokens
+            </button>
+          </div>
+          <div className="stats-cards-mini">
+            <div className="stat-mini">
+              <span>Total: {tokens.length}</span>
+              <span>Used: {tokens.filter(t => t.status === 'USED').length}</span>
+              <span>Active: {tokens.filter(t => t.status === 'ACTIVE').length}</span>
+            </div>
+          </div>
+          <div className="table-container">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Token Number</th>
+                  <th>Value</th>
+                  <th>Status</th>
+                  <th>Used By</th>
+                  <th>Used At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tokens.slice(0, 100).map((token, i) => {
+                  // Find dealer name from dealer ID
+                  const dealer = dealers.find(d => d.id === token.usedBy);
+                  const usedByName = dealer ? dealer.name : token.usedBy || '-';
+                  
+                  return (
+                    <tr key={i}>
+                      <td>{token.tokenNumber}</td>
+                      <td>₹{token.value}</td>
+                      <td>
+                        <span className={`status-${token.status?.toLowerCase()}`}>
+                          {token.status}
+                        </span>
+                      </td>
+                      <td>{usedByName}</td>
+                      <td>{formatDate(token.usedAt)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Redeems Tab */}
       {activeTab === "redeems" && (
@@ -386,7 +394,15 @@ export default function AdminDashboard({ onLogout }) {
           <div className="table-container">
             <table className="data-table">
               <thead>
-                <tr><th>ID</th><th>Dealer</th><th>Amount</th><th>UPI ID</th><th>Status</th><th>Requested</th><th>Action</th></tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Dealer</th>
+                  <th>Amount</th>
+                  <th>UPI ID</th>
+                  <th>Status</th>
+                  <th>Requested</th>
+                  <th>Action</th>
+                </tr>
               </thead>
               <tbody>
                 {redeems.map((redeem, i) => (
